@@ -41,7 +41,7 @@ void putPathOnBoard(vector<square>& board, const int dim[], const int& endIndex)
 			break;
 		}
 		prevIndex = board[currIndex].cameFrom;
-		prevDir = relToPrev(board, currIndex, prevIndex, dim);
+		prevDir = relToPrev(currIndex, prevIndex, dim);
 		board[prevIndex].type = prevDir;
 		currIndex = prevIndex;
 	}
@@ -74,20 +74,25 @@ void printMapSln(vector<square>& board, const int dim[], int endIndex) {
 void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 	ostringstream ss;
 	putPathOnBoard(board, dim, endIndex);
+	ss << dim[0] << "\n";
+	ss << dim[1] << "\n";
+	ss << "//path taken \n";
 	int currIndex = endIndex;
 	int prevIndex;
 	int prevLoc[3];
+	vector<int> printHelp;
 	while(true) {
 		if(board[currIndex].cameFrom == -1) {
 			break;
 		}
 		prevIndex = board[currIndex].cameFrom;
-		locationFrIndx(prevIndex, dim, prevLoc);
-		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << 	prevLoc[2] << "," << board[prevIndex].type << ")" << "\n";
+		printHelp.push_back(prevIndex);
+		currIndex = prevIndex;
 	}
-	ss << dim[1] << "\n";
-	ss << dim[0] << "\n";
-	ss << "//path taken \n";
+	for(int i = printHelp.size() - 1; i >= 0; i--) {
+		locationFrIndx(printHelp[i], dim, prevLoc);
+		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << prevLoc[2] << "," << board[printHelp[i]].type << ")" << "\n";
+	}
 	cout << ss.str();
 }
 
