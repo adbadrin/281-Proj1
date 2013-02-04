@@ -75,17 +75,6 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 	return true;
 }
 
-void printMap (const vector<square> & board, int dim[]) {
-	ostringstream ss;
-	for(int i = 0; i < board.size(); i++) {
-		if(i % dim[0] == 0) {
-			ss << '\n';
-		}
-		ss << board[i].type;
-	}
-	cout<<ss.str()<< "\n";
-}
-
 bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 	string s;
 	string t;

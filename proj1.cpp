@@ -82,14 +82,25 @@ int main(int argc, char* argv[]) {
 	}
 	*/
 	decider.add_front(board[startIndex]);
-	while((!decider.empty()) || !(decider.front().type == 'B')) {
+	while((!decider.empty()) && !(decider.front().type == 'B')) {
 		nextMove(board, decider, dim, useStack);
 	}
 	if(decider.empty()) {
-		cout << "No path found! \n";
+		if(mapOut) {
+			printMap(board, dim);
+		}
+		else {
+			cout << dim[0] << "\n" << dim[1] << "\n" << "//path taken" << "\n";
+		}
 		return 0;
 	}
-	endIndex = decider.front().type;
+	endIndex = decider.front().index;
+	if(mapOut) {
+		printMapSln(board, dim, endIndex);
+	}
+	else {
+		printListSln(board, dim, endIndex);
+	}
 }
 
 				

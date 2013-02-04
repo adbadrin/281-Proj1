@@ -82,5 +82,21 @@ void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 		locationFrIndx(prevIndex, dim, prevLoc);
 		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << 	prevLoc[2] << "," << board[prevIndex].type << ")" << "\n";
 	}
+	ss << dim[1] << "\n";
+	ss << dim[0] << "\n";
+	ss << "//path taken \n";
 	cout << ss.str();
+}
+
+void printMap (const vector<square> & board, int dim[]) {
+	ostringstream ss;
+	for(int i = 0; i < board.size(); i++) {
+		if(i % dim[0] == 0) {
+			ss << '\n';
+		}
+		ss << board[i].type;
+	}
+	ss << dim[1];
+	ss << dim[0];
+	cout<<ss.str()<< "\n";
 }
