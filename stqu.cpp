@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "stqu.h"
 using namespace std;
 
@@ -42,11 +43,11 @@ void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bo
 		 */
 		int loc[3];
 		locationFrIndx(index, dim, loc);
-		loc[2] = atoi(board[index].type[0]);
+		loc[2] = atoi(board[index].type.c_str());
 		if(loc[2] >= dim[1]) {}
 		else {
-			adIndex = indexFrLoc(loc, dim, adIndex);
-			if (board[adIndex].type[0] == '#') {}
+			indexFrLoc(loc, dim, adIndex);
+			if (board[adIndex].type == "#") {}
 			else if(board[adIndex].cameFrom != -1) {}
 			else {
 				board[adIndex].cameFrom = index;
@@ -57,7 +58,7 @@ void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bo
 	else {
 		for(int i = 0; i < 4; i++) {
 			if(getSqAtDir(index, dim, adIndex, dir(i))) {
-				if(board[adIndex].type == '#') {}
+				if(board[adIndex].type == "#") {}
 				}
 				else if(board[adIndex].cameFrom != -1) {}
 				else {

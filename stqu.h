@@ -8,6 +8,6 @@ bool getSqAtDir(int index, const int dim[], int& neigh, dir card);
 void genPush(std::vector<square>& board, std::deque<square>& decider, int& adIndex, bool useStack); 
 
 
-bool nextMove(std::vector<square>& board, std::deque<square>& decider, const int dim[], bool useStack); 
+void nextMove(std::vector<square>& board, std::deque<square>& decider, const int dim[], bool useStack); 
 
 #endif

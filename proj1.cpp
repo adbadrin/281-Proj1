@@ -4,6 +4,7 @@
 #include <getopt.h>
 #include "build.h"
 #include "stqu.h"
+#include "print.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -15,8 +16,8 @@ int main(int argc, char* argv[]) {
 	bool mapOut = true;
 	int startIndex;
 	int endIndex;
-	/*
 	string s;
+	int dim[3];
 	while(c != -1){
 		const struct option long_options[] = {
 			{"stack", 0, 0, 's'},
@@ -68,21 +69,20 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	getline(cin, s);
-	if(s == 'M') {
-		if(!(buildFromMap(board, dim))) {
+	if(s == "M") {
+		if(!(buildFromMap(board, dim, startIndex))) {
 			cerr << "Bad (map) input! \n";
 			return 1;
 		}
 	}
 	else {
-		if(!(buildFromList(board, dim))) {
+		if(!(buildFromList(board, dim, startIndex))) {
 			cerr << "Bad (list) input! \n";
 			return 1;
 		}
 	}
-	*/
-	decider.add_front(board[startIndex]);
-	while((!decider.empty()) && !(decider.front().type == 'B')) {
+	decider.push_front(board[startIndex]);
+	while((!decider.empty()) && !(decider.front().type == "B")) {
 		nextMove(board, decider, dim, useStack);
 	}
 	if(decider.empty()) {

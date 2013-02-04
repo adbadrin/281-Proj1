@@ -46,7 +46,7 @@ void putPathOnBoard(vector<square>& board, const int dim[], const int& endIndex)
 }
 
 
-void printMapSln(vector<square>& board, deque<square>& decider, const int dim[], int endIndex) {
+void printMapSln(vector<square>& board, const int dim[], int endIndex) {
 	ostringstream ss;
 	int floor;
 	putPathOnBoard(board, dim, endIndex);
@@ -88,7 +88,7 @@ void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 	cout << ss.str();
 }
 
-void printMap (const vector<square> & board, int dim[]) {
+void printMap (const vector<square>& board, int dim[]) {
 	ostringstream ss;
 	for(int i = 0; i < board.size(); i++) {
 		if(i % dim[0] == 0) {
