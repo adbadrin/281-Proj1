@@ -51,7 +51,7 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 					default:
 						if(isdigit(s[i])) {
 							int j = s[i] - '0';
-							if(j >= dim[1]) {
+							if(j < 0) {
 								return false;
 							}
 							else {

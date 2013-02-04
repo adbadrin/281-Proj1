@@ -1,26 +1,21 @@
-#include "build.h"
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <getopt.h>
+#include "build.h"
+#include "stqu.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
 	vector<square> board; 
-	int startIndex;
-	int dim[2];
-	if(buildFromList(board, dim, startIndex)) {
-		printMap(board, dim);
-	}
-	/*
-	queue<square> path;
-	queue<square> decideQ;
-	stack<square> decideS;
+	deque<square> decider;
 	int c = 0;
 	bool useStack = false;
 	bool useQueue = false;
 	bool mapOut = true;
 	int startIndex;
+	int endIndex;
+	/*
 	string s;
 	while(c != -1){
 		const struct option long_options[] = {
@@ -52,12 +47,12 @@ int main(int argc, char* argv[]) {
 
 			case 'h':
 				cout << "This does something. \n";
-				return 1;
+				return 0;
 				break;
 
 			case '?':
 				cout << "Invalid option. \n";
-				return 0;
+				return 1;
 				break;
 
 			default:
@@ -66,7 +61,11 @@ int main(int argc, char* argv[]) {
 	}
 	if(useStack && useQueue) {
 		cerr << "You can't select both stacks AND queues! \n";
-		return 0;
+		return 1;
+	}
+	if(!useStack && !useQueue) {
+		cerr <<"You have to select at ONE of stacks or queues! \n";
+		return 1;
 	}
 	getline(cin, s);
 	if(s == 'M') {
@@ -81,21 +80,16 @@ int main(int argc, char* argv[]) {
 			return 1;
 		}
 	}
-	if(useStack) {
-		decideQ.push_back(board[startIndex]);
-		while(true) {
-			if(path.back().type == "B") {
-				//We Made It Home!
-				break;
-			}
-			if(decideQ.empty()) {
-				//No more possible options... we're hosed!
-				break;
-			}
-			addToQueue(board, path, decider, dim);
-		}
-	}
 	*/
+	decider.add_front(board[startIndex]);
+	while((!decider.empty()) || !(decider.front().type == 'B')) {
+		nextMove(board, decider, dim, useStack);
+	}
+	if(decider.empty()) {
+		cout << "No path found! \n";
+		return 0;
+	}
+	endIndex = decider.front().type;
 }
 
 				

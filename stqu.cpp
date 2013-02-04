@@ -30,31 +30,41 @@ void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool u
 	}
 }
 
-bool nextMove(vector<square>& board, deque<square>& decider, const int dim[], bool useStack) {
+
+void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bool useStack) {
 	int adIndex;
-	if(!(decider.empty())) {
-		int index = (decider.front()).index;
-		if(isdigit(board[index].type[0])) {
-			/*
-			 * adIndex = portalFunction
-			 * board[adIndex].cameFrom = index
-			 * genPush(board, decider, useStack, adIndex);
-			 */
-		}
+	int index = (decider.front()).index;
+	if(isdigit(board[index].type[0])) {
+		/*
+		 * adIndex = portalFunction
+		 * board[adIndex].cameFrom = index
+		 * genPush(board, decider, useStack, adIndex);
+		 */
+		int loc[3];
+		locationFrIndx(index, dim, loc);
+		loc[2] = atoi(board[index].type[0]);
+		if(loc[2] >= dim[1]) {}
 		else {
-			for(int i = 0; i < 4; i++) {
-				if(getSqAtDir(index, dim, adIndex, dir(i))) {
+			adIndex = indexFrLoc(loc, dim, adIndex);
+			if (board[adIndex].type[0] == '#') {}
+			else if(board[adIndex].cameFrom != -1) {}
+			else {
+				board[adIndex].cameFrom = index;
+				genPush(board, decider, adIndex, useStack);
+			}
+		}
+	}
+	else {
+		for(int i = 0; i < 4; i++) {
+			if(getSqAtDir(index, dim, adIndex, dir(i))) {
+				if(board[adIndex].type == '#') {}
+				}
+				else if(board[adIndex].cameFrom != -1) {}
+				else {
 					board[adIndex].cameFrom = index;
 					genPush(board, decider, adIndex, useStack);
 				}
 			}
 		}
-		decider.pop_front();
-		return true;
-	}
-	return false;
+	decider.pop_front();
 }
-
-
-
-			
