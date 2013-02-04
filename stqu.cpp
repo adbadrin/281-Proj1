@@ -1,5 +1,4 @@
 #include "stqu.h"
-#include <deque>
 using namespace std;
 
 bool getSqAtDir(int index, const int dim[], int& neigh, dir card) {
@@ -22,7 +21,7 @@ bool getSqAtDir(int index, const int dim[], int& neigh, dir card) {
 	return true;
 }
 
-void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool& useStack) {
+void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool useStack) {
 	if(useStack) {
 		decider.push_front(board[adIndex]);
 	}
@@ -31,7 +30,7 @@ void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool& 
 	}
 }
 
-bool nextMove(vector<square>& board, deque<square>& decider, int dim[], bool useStack) {
+bool nextMove(vector<square>& board, deque<square>& decider, const int dim[], bool useStack) {
 	int adIndex;
 	if(!(decider.empty())) {
 		int index = (decider.front()).index;

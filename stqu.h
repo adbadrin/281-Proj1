@@ -1,13 +1,13 @@
 #ifndef STQU_H
 #define STQU_H
 #include "build.h"
+#include <deque>
 
-bool getSqAtDir(int index, const indim[], int& neigh, dir card);
+bool getSqAtDir(int index, const int dim[], int& neigh, dir card);
+
+void genPush(std::vector<square>& board, std::deque<square>& decider, int& adIndex, bool useStack); 
 
 
-void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool useStack); 
-
-
-bool nextMove(vector<square>& board, deque<square>& decider, int dim[], bool useStack); 
+bool nextMove(std::vector<square>& board, std::deque<square>& decider, const int dim[], bool useStack); 
 
 #endif
