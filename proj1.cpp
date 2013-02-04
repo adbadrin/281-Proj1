@@ -47,12 +47,12 @@ int main(int argc, char* argv[]) {
 				break;
 
 			case 'h':
-				cout << "This does something. \n";
+				cout << "This helps aliens escape because humans hate their own species. \n";
 				return 0;
 				break;
 
 			case '?':
-				cout << "Invalid option. \n";
+				cerr << "Invalid option. \n";
 				return 1;
 				break;
 
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	if(!useStack && !useQueue) {
-		cerr <<"You have to select at ONE of stacks or queues! \n";
+		cerr <<"You have to select ONE of stacks or queues! \n";
 		return 1;
 	}
 	getline(cin, s);
