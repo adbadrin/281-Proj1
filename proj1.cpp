@@ -98,9 +98,10 @@ int main(int argc, char* argv[]) {
 	if(mapOut) {
 		printMapSln(board, dim, endIndex);
 	}
-	else {
+	/*else {
 		printListSln(board, dim, endIndex);
 	}
+	*/
 }
 
 				

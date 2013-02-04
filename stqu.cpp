@@ -7,15 +7,19 @@ bool getSqAtDir(int index, const int dim[], int& neigh, dir card) {
 	locationFrIndx(index, dim, proposed);
 	switch ((int)card) {
 		case 0:
-			proposed[1] += 1;
-		case 1:
-			proposed[0] += 1;
-		case 2:
-			proposed[1] -= 1;
-		case 3:
 			proposed[0] -= 1;
+			break;
+		case 1:
+			proposed[1] += 1;
+			break;
+		case 2:
+			proposed[0] += 1;
+			break;
+		case 3:
+			proposed[1] -= 1;
+			break;
 	}
-	if((proposed[0] >= dim[0]) || (proposed[1] >= dim[1]) || (proposed[0] < 0) || (proposed[1] < 0)) {
+	if((proposed[0] >= dim[0]) || (proposed[1] >= dim[0]) || (proposed[0] < 0) || (proposed[1] < 0)) {
 		return false;
 	}
 	indexFrLoc(proposed, dim, neigh);
@@ -35,12 +39,8 @@ void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool u
 void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bool useStack) {
 	int adIndex;
 	int index = (decider.front()).index;
+	decider.pop_front();
 	if(isdigit(board[index].type[0])) {
-		/*
-		 * adIndex = portalFunction
-		 * board[adIndex].cameFrom = index
-		 * genPush(board, decider, useStack, adIndex);
-		 */
 		int loc[3];
 		locationFrIndx(index, dim, loc);
 		loc[2] = atoi(board[index].type.c_str());
@@ -59,13 +59,16 @@ void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bo
 		for(int i = 0; i < 4; i++) {
 			if(getSqAtDir(index, dim, adIndex, dir(i))) {
 				if(board[adIndex].type == "#") {}
-				}
 				else if(board[adIndex].cameFrom != -1) {}
+				else if(board[adIndex].type == "S") {}
 				else {
 					board[adIndex].cameFrom = index;
 					genPush(board, decider, adIndex, useStack);
+					if(decider.front().type == "B") {
+						break;
+					}
 				}
 			}
 		}
-	decider.pop_front();
+	}
 }

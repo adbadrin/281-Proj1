@@ -3,17 +3,45 @@
 #include <iostream>
 #include <cstring>
 #include <sstream>
+#include <algorithm>
 using namespace std;
 
 //Tested, and works
 void locationFrIndx(const int& index, const int dim[], int loc[]) {
-	loc[2] = index / (dim[0] * dim[0]);
-	loc[1] = ((index - loc[2] * loc[0] * loc[0]) / dim[0]) % dim[0];
-	loc[0] = (index - loc[2] * loc[0] * loc[0]) % dim[0];
+	loc[0] = 0;
+	loc[1] = -1;
+	loc[2] = dim[1]-1;
+	for(int i = 0; i <=index; i++) {
+		loc[1]++;
+		if(loc[1] >= dim[0]) {
+			loc[1] -= dim[0];
+			loc[0]++;
+			if(loc[0] >= dim[0]) {
+				loc[2]--;
+				loc[0] -= dim[0];
+			}
+		}
+	}
 }
 
 void indexFrLoc(const int loc[], const int dim[], int& index) {
-	index = loc[2] * dim[0] * dim[0] + loc[1] * dim[0] + loc[0];
+	index = 0;
+	int temp[3] = {0, 0, dim[1] - 1};
+	while(true) {
+		if((loc[0] == temp[0]) && (loc[1] == temp[1]) && (loc[2] == temp[2])) {
+			break;
+		}
+		temp[1]++;
+		if(temp[1] >= dim[0]) {
+			temp[1] -= dim[0];
+			temp[0]++;
+			if(temp[0] >= dim[0]) {
+				temp[2]--;
+				temp[0] -= dim[0];
+			}
+		}
+		index++;
+	}
 }
 
 
@@ -48,6 +76,7 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 					case 'S':
 						currSquare.type = s[i];
 						startIndex = counter;
+						break;
 					default:
 						if(isdigit(s[i])) {
 							int j = s[i] - '0';
@@ -71,7 +100,7 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 	}
 	if(counter != (dim[1] * dim[0] * dim[0])) {
 	       return false;
-	}	       
+	}
 	return true;
 }
 
@@ -137,6 +166,7 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 			board[index] = currSquare;
 		}
 	}
+	reverse(board.begin(), board.end());
 	for(int i = 0; i < board.size(); i++) {
 		board[i].index = i;
 	}

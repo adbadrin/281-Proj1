@@ -1,29 +1,30 @@
 #include <iostream>
 #include <cstdlib>
 #include <sstream>
+#include <algorithm>
 #include "print.h"
 #include "stqu.h"
 using namespace std;
 
-string relToPrev(vector<square>& board, int currIndex, int prevIndex, const int dim[]) {
+string relToPrev(int currIndex, int prevIndex, const int dim[]) {
 	int currLoc[3];
 	int prevLoc[3];
 	locationFrIndx(currIndex, dim, currLoc);
 	locationFrIndx(prevIndex, dim, prevLoc);
 	if(abs(prevLoc[0] - currLoc[0]) == 1) {
 		if(prevLoc[0] - currLoc[0] == 1) {
-			return "e";
+			return "n";
 		}
 		else {
-			return "w";
+			return "s";
 		}
 	}
 	if(abs(prevLoc[1] - currLoc[1]) == 1) {
 		if(prevLoc[1] - currLoc[1] == 1) {
-			return "s";
+			return "w";
 		}
 		else {
-			return "n";
+			return "e";
 		}
 	}
 	return "p";
@@ -42,32 +43,34 @@ void putPathOnBoard(vector<square>& board, const int dim[], const int& endIndex)
 		prevIndex = board[currIndex].cameFrom;
 		prevDir = relToPrev(board, currIndex, prevIndex, dim);
 		board[prevIndex].type = prevDir;
+		currIndex = prevIndex;
 	}
 }
 
-
+//THIS WORKS NOW!!!
 void printMapSln(vector<square>& board, const int dim[], int endIndex) {
 	ostringstream ss;
-	int floor;
+	ss << dim[0] << "\n";
+	ss << dim[1] << "\n";
+	int floor = dim[1] - 1;
 	putPathOnBoard(board, dim, endIndex);
 	int i;
+	ss << "//room " << floor << "\n";
 	for(i = 0; i < board.size(); i++) {
 		if((i!=0) && (i % dim[0] == 0)) {
 			ss << '\n';
 		}
-		if((i!=0) && (i & (dim[0] * dim[0]) == 0)) {
-				floor = i/(dim[0] * dim[0]) - 1;
+		if((i!=0) && (i % (dim[0] * dim[0]) == 0)) {
+				floor--;
 				ss << "//room " << floor << "\n";
 		}
 		ss << board[i].type;
 	}
 	floor =  i/(dim[0] * dim[0]) - 1;
-	ss << "//room " << floor << "\n";
-	ss << dim[1] << "\n";
-	ss << dim[0] << "\n";
 	cout << ss.str();
 }
 
+//MAKE SURE THIS WORKS TOO!
 void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 	ostringstream ss;
 	putPathOnBoard(board, dim, endIndex);

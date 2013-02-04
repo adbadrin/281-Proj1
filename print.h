@@ -2,7 +2,7 @@
 #define PRINT_H
 #include "build.h"
 
-std::string relToPrev(std::vector<square>& board, int currIndex, int prevIndex, const int dim[]);
+std::string relToPrev(int currIndex, int prevIndex, const int dim[]);
 
 void printMap(const std::vector<square>& board, int dim[]);
 
