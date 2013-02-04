@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 			{0, 0 , 0, 0}
 		};
 		int option_index = 0;
-		c = getopt_long(argc, argv, "sqoh", long_options, &option_index);
+		c = getopt_long(argc, argv, "sqo:h", long_options, &option_index);
 		switch (c) {
 
 			case 's':
