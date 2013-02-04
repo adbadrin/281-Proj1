@@ -48,12 +48,14 @@ void putPathOnBoard(vector<square>& board, const int dim[], const int& endIndex)
 }
 
 //THIS WORKS NOW!!!
-void printMapSln(vector<square>& board, const int dim[], int endIndex) {
+void printMapSln(vector<square>& board, const int dim[], int endIndex, bool putPath) {
 	ostringstream ss;
 	ss << dim[0] << "\n";
 	ss << dim[1] << "\n";
 	int floor = dim[1] - 1;
-	putPathOnBoard(board, dim, endIndex);
+	if(putPath) {
+		putPathOnBoard(board, dim, endIndex);
+	}
 	int i;
 	ss << "//room " << floor << "\n";
 	for(i = 0; i < board.size(); i++) {
@@ -66,8 +68,7 @@ void printMapSln(vector<square>& board, const int dim[], int endIndex) {
 		}
 		ss << board[i].type;
 	}
-	floor =  i/(dim[0] * dim[0]) - 1;
-	cout << ss.str();
+	cout << ss.str() << "\n";
 }
 
 //MAKE SURE THIS WORKS TOO!
@@ -93,18 +94,6 @@ void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 		locationFrIndx(printHelp[i], dim, prevLoc);
 		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << prevLoc[2] << "," << board[printHelp[i]].type << ")" << "\n";
 	}
-	cout << ss.str();
+	cout << ss.str() << "\n";
 }
 
-void printMap (const vector<square>& board, int dim[]) {
-	ostringstream ss;
-	for(int i = 0; i < board.size(); i++) {
-		if(i % dim[0] == 0) {
-			ss << '\n';
-		}
-		ss << board[i].type;
-	}
-	ss << dim[1];
-	ss << dim[0];
-	cout<<ss.str()<< "\n";
-}

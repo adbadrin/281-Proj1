@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	getline(cin, s);
-	if(s == "M") {
+	if(s[0] == 'M') {
 		if(!(buildFromMap(board, dim, startIndex))) {
 			cerr << "Bad (map) input! \n";
 			return 1;
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 	}
 	if(decider.empty()) {
 		if(mapOut) {
-			printMap(board, dim);
+			printMapSln(board, dim, -1, false);
 		}
 		else {
 			cout << dim[0] << "\n" << dim[1] << "\n" << "//path taken" << "\n";
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
 	}
 	endIndex = decider.front().index;
 	if(mapOut) {
-		printMapSln(board, dim, endIndex);
+		printMapSln(board, dim, endIndex, true);
 	}
 	else {
 		printListSln(board, dim, endIndex);
