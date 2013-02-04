@@ -6,13 +6,13 @@
 using namespace std;
 
 //Tested, and works
-void locationFrIndx(const& int index, const int dim[], int loc[]) {
+void locationFrIndx(const int& index, const int dim[], int loc[]) {
 	loc[2] = index / (dim[0] * dim[0]);
 	loc[1] = ((index - loc[2] * loc[0] * loc[0]) / dim[0]) % dim[0];
 	loc[0] = (index - loc[2] * loc[0] * loc[0]) % dim[0];
 }
 
-void indexFrLoc(int loc[], const int dim[], const int& index) {
+void indexFrLoc(const int loc[], const int dim[], int& index) {
 	index = loc[2] * dim[0] * dim[0] + loc[1] * dim[0] + loc[0];
 }
 

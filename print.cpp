@@ -1,5 +1,8 @@
 #include <iostream>
+#include <cstdlib>
 #include <sstream>
+#include "print.h"
+#include "stqu.h"
 using namespace std;
 
 string relToPrev(vector<square>& board, int currIndex, int prevIndex, const int dim[]) {
@@ -28,7 +31,7 @@ string relToPrev(vector<square>& board, int currIndex, int prevIndex, const int 
 
 
 	
-void putPathOnBoard(vector<square& board, const int dim[], const int endIndex) {
+void putPathOnBoard(vector<square>& board, const int dim[], const int& endIndex) {
 	int currIndex = endIndex;
 	int prevIndex;
 	string prevDir;
@@ -37,7 +40,7 @@ void putPathOnBoard(vector<square& board, const int dim[], const int endIndex) {
 			break;
 		}
 		prevIndex = board[currIndex].cameFrom;
-		prevDir = relToPrev(board, currInd, prevIndex, dim);
+		prevDir = relToPrev(board, currIndex, prevIndex, dim);
 		board[prevIndex].type = prevDir;
 	}
 }
@@ -47,7 +50,8 @@ void printMapSln(vector<square>& board, deque<square>& decider, const int dim[],
 	ostringstream ss;
 	int floor;
 	putPathOnBoard(board, dim, endIndex);
-	for(int i = 0; i < board.size(); i++) {
+	int i;
+	for(i = 0; i < board.size(); i++) {
 		if((i!=0) && (i % dim[0] == 0)) {
 			ss << '\n';
 		}
@@ -64,18 +68,18 @@ void printMapSln(vector<square>& board, deque<square>& decider, const int dim[],
 	cout << ss.str();
 }
 
-void printList(std::vector<square>& board, const int dim[], int endIndex) {
+void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 	ostringstream ss;
 	putPathOnBoard(board, dim, endIndex);
 	int currIndex = endIndex;
 	int prevIndex;
-	int prevLoc[3]
+	int prevLoc[3];
 	while(true) {
 		if(board[currIndex].cameFrom == -1) {
 			break;
 		}
 		prevIndex = board[currIndex].cameFrom;
-		locationFrIndx(prevLoc, dim, prevIndex);
+		locationFrIndx(prevIndex, dim, prevLoc);
 		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << 	prevLoc[2] << "," << board[prevIndex].type << ")" << "\n";
 	}
 	cout << ss.str();
