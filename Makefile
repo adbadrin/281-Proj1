@@ -11,3 +11,9 @@ all:
 
 clean:
 	rm *.o proj1
+
+old:
+	g++ -O3 proj1o.cpp build.cpp print.cpp stquo.cpp -o proj1o
+
+bigTest:
+	g++ coordinateTest.cpp build.cpp -o builder
