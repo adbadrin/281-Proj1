@@ -187,7 +187,6 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 			board[index] = currSquare;
 		}
 	}
-	reverse(board.begin(), board.end());
 	for(int i = 0; i < board.size(); i++) {
 		board[i].index = i;
 	}

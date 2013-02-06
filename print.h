@@ -4,8 +4,6 @@
 
 std::string relToPrev(int currIndex, int prevIndex, const int dim[]);
 
-void printMap(const std::vector<square>& board, int dim[]);
-
 void printMapSln(std::vector<square>& board, const int dim[], int endIndex, bool putPath);
 
 void printListSln(std::vector<square>& board, const int dim[], int endIndex);
