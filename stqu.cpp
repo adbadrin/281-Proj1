@@ -26,19 +26,19 @@ bool getSqAtDir(int index, const int dim[], int& neigh, dir card) {
 	return true;
 }
 
-void genPush(vector<square>& board, deque<square>& decider, int& adIndex, bool useStack) {
+void genPush(deque<int>& decider, int& adIndex, bool useStack) {
 	if(useStack) {
-		decider.push_front(board[adIndex]);
+		decider.push_front(adIndex);
 	}
 	else {
-		decider.push_back(board[adIndex]);
+		decider.push_back(adIndex);
 	}
 }
 
 
-void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bool useStack) {
+void nextMove(vector<square>& board, deque<int>& decider, const int dim[], bool useStack) {
 	int adIndex;
-	int index = (decider.front()).index;
+	int index = decider.front();
 	decider.pop_front();
 	if(isdigit(board[index].type[0])) {
 		int loc[3];
@@ -51,7 +51,7 @@ void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bo
 			else if(board[adIndex].cameFrom != -1) {}
 			else {
 				board[adIndex].cameFrom = index;
-				genPush(board, decider, adIndex, useStack);
+				genPush(decider, adIndex, useStack);
 			}
 		}
 	}
@@ -63,8 +63,8 @@ void nextMove(vector<square>& board, deque<square>& decider, const int dim[], bo
 				else if(board[adIndex].type == "S") {}
 				else {
 					board[adIndex].cameFrom = index;
-					genPush(board, decider, adIndex, useStack);
-					if(decider.front().type == "B") {
+					genPush(decider, adIndex, useStack);
+					if(board[decider.front()].type == "B") {
 						break;
 					}
 				}

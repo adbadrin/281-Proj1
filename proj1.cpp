@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	vector<square> board; 
-	deque<square> decider;
+	deque<int> decider;
 	int c = 0;
 	bool useStack = false;
 	bool useQueue = false;
@@ -82,8 +82,8 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	//Consider converting this to a deque of indices to save memory use
-	decider.push_front(board[startIndex]);
-	while((!decider.empty()) && !(decider.front().type == "B")) {
+	decider.push_front(startIndex);
+	while((!decider.empty()) && !(board[decider.front()].type == "B")) {
 		nextMove(board, decider, dim, useStack);
 	}
 	if(decider.empty()) {
@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
 		}
 		return 0;
 	}
-	endIndex = decider.front().index;
+	endIndex = decider.front();
 	if(mapOut) {
 		printMapSln(board, dim, endIndex, true);
 	}
