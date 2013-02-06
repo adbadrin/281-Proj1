@@ -45,7 +45,7 @@ void buildCordMap() {
 	}
 	cout << ss.str();
 }
-/*
+
 void printList(vector<square>& board, int dim[]) {
 	int loc[3];
 	ostringstream ss;
@@ -57,19 +57,14 @@ void printList(vector<square>& board, int dim[]) {
 	}
 	cout << ss.str();
 }
-*/
-
-
 
 int main() {
 	buildCordMap();
-	/*
 	vector<square> board;
 	int dim[2];
 	int startIndex;
 	buildFromList(board, dim, startIndex);
 	printMapSln(board, dim, -1, false);
-	*/
 }
 
 
