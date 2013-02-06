@@ -6,64 +6,16 @@
 #include <algorithm>
 using namespace std;
 
-/*
-//Tested, and works
-//Antiquated for being an insanely slow piece of crap
-void locationFrIndx(const int& index, const int dim[], int loc[]) {
-	loc[0] = 0;
-	loc[1] = -1;
-	loc[2] = dim[1]-1;
-	for(int i = 0; i <=index; i++) {
-		loc[1]++;
-		if(loc[1] >= dim[0]) {
-			loc[1] -= dim[0];
-			loc[0]++;
-			if(loc[0] >= dim[0]) {
-				loc[2]--;
-				loc[0] -= dim[0];
-			}
-		}
-	}
-}
-*/
-
-/*
-//Antiquated for being a stupidly slow piece of crap 
-void indexFrLoc(const int loc[], const int dim[], int& index) {
-	index = 0;
-	int temp[3] = {0, 0, dim[1] - 1};
-	while(true) {
-		if((loc[0] == temp[0]) && (loc[1] == temp[1]) && (loc[2] == temp[2])) {
-			break;
-		}
-		temp[1]++;
-		if(temp[1] >= dim[0]) {
-			temp[1] -= dim[0];
-			temp[0]++;
-			if(temp[0] >= dim[0]) {
-				temp[2]--;
-				temp[0] -= dim[0];
-			}
-		}
-		index++;
-	}
-}
-*/
-
 void locationFrIndx(const int&index, const int dim[], int loc[]) {
 	loc[2] = dim[1] - 1 - index/(dim[0] * dim[0]);
 	loc[1] = index % dim[0];
 	loc[0] = (index - (dim[1] - 1 - loc[2]) * (dim[0] * dim[0])) / dim[0];
 }
 
-
 void indexFrLoc(const int loc[], const int dim[], int& index) {
 	index = loc[0] * dim[0] + loc[1] + (dim[1] - 1 - loc[2]) * (dim[0] * dim[0]);
 }
 
-
-
-// NEED TO TEST AGAIN!
 //dim is a two dimensional array, dim[0] = number of rows = number of columns, dim[1] = number of floors
 bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 	string s; //Used for parsing through map with getline()
@@ -80,9 +32,6 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 		}
 		else if((s[0] == '/') && (s[1] == '/')) {}
 		else {
-			if(s.length() != dim[0]) {
-				return false;
-			}
 			for(int i = 0; i < s.length(); i++) {
 				switch (s[i]) {
 					case '.':
@@ -96,12 +45,6 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 						break;
 					default:
 						if(isdigit(s[i])) {
-							/*
-							int j = s[i] - '0';
-							if(j < 0) {
-								return false;
-							}
-							*/
 							currSquare.type = s[i];
 						}
 						else {
@@ -115,11 +58,6 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 			}
 		}
 	}
-	/*
-	if(counter != (dim[1] * dim[0] * dim[0])) {
-	       return false;
-	}
-	*/
 	return true;
 }
 
@@ -170,12 +108,6 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 					break;
 				default:
 					if(isdigit(t[0])) {
-						/*
-						int j = t[0] - '0';
-						if(j < 0 ) {
-							return false;
-						}
-						*/
 						currSquare.type = t;
 					}
 					else {
