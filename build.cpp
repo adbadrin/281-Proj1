@@ -98,8 +98,10 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 			}
 		}
 	}
+	/*
 	if(counter != (dim[1] * dim[0] * dim[0])) {
 	       return false;
+	*/
 	}
 	return true;
 }
@@ -152,7 +154,7 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 				default:
 					if(isdigit(t[0])) {
 						int j = t[0] - '0';
-						if((j < 0) || (j > dim[1])) {
+						if(j < 0 ) {
 							return false;
 						}
 						currSquare.type = t;
