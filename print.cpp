@@ -94,6 +94,6 @@ void printListSln(std::vector<square>& board, const int dim[], int endIndex) {
 		locationFrIndx(printHelp[i], dim, prevLoc);
 		ss << "(" << prevLoc[0] << "," << prevLoc[1] << "," << prevLoc[2] << "," << board[printHelp[i]].type << ")" << "\n";
 	}
-	cout << ss.str() << "\n";
+	cout << ss.str();
 }
 

@@ -6,7 +6,9 @@
 #include <algorithm>
 using namespace std;
 
+/*
 //Tested, and works
+//Antiquated for being an insanely slow piece of crap
 void locationFrIndx(const int& index, const int dim[], int loc[]) {
 	loc[0] = 0;
 	loc[1] = -1;
@@ -23,7 +25,10 @@ void locationFrIndx(const int& index, const int dim[], int loc[]) {
 		}
 	}
 }
+*/
 
+/*
+//Antiquated for being a stupidly slow piece of crap 
 void indexFrLoc(const int loc[], const int dim[], int& index) {
 	index = 0;
 	int temp[3] = {0, 0, dim[1] - 1};
@@ -42,6 +47,18 @@ void indexFrLoc(const int loc[], const int dim[], int& index) {
 		}
 		index++;
 	}
+}
+*/
+
+void locationFrIndx(const int&index, const int dim[], int loc[]) {
+	loc[2] = dim[1] - 1 - index/(dim[0] * dim[0]);
+	loc[1] = index % dim[0];
+	loc[0] = (index - (dim[1] - 1 - loc[2]) * (dim[0] * dim[0])) / dim[0];
+}
+
+
+void indexFrLoc(const int loc[], const int dim[], int& index) {
+	index = loc[0] * dim[0] + loc[1] + (dim[1] - 1 - loc[2]) * (dim[0] * dim[0]);
 }
 
 
@@ -79,13 +96,13 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 						break;
 					default:
 						if(isdigit(s[i])) {
+							/*
 							int j = s[i] - '0';
 							if(j < 0) {
 								return false;
 							}
-							else {
-								currSquare.type = s[i];
-							}
+							*/
+							currSquare.type = s[i];
 						}
 						else {
 							return false;
@@ -101,8 +118,8 @@ bool buildFromMap(vector<square>& board, int dim[], int& startIndex) {
 	/*
 	if(counter != (dim[1] * dim[0] * dim[0])) {
 	       return false;
-	*/
 	}
+	*/
 	return true;
 }
 
@@ -136,7 +153,7 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 					return false;
 				}
 			}
-			if((loc[0] >= dim[0]) || (loc[1] >= dim[0]) || (loc[1] >= dim[1])) {
+			if((loc[0] >= dim[0]) || (loc[1] >= dim[0]) || (loc[2] >= dim[1])) {
 				return false;
 			}
 			getline(ss,t,',');
@@ -153,10 +170,12 @@ bool buildFromList(vector<square>& board, int dim[], int& startIndex) {
 					break;
 				default:
 					if(isdigit(t[0])) {
+						/*
 						int j = t[0] - '0';
 						if(j < 0 ) {
 							return false;
 						}
+						*/
 						currSquare.type = t;
 					}
 					else {
