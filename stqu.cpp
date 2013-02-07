@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include "stqu.h"
+#include <ctype.h>
 using namespace std;
 
 bool getSqAtDir(int index, const int dim[], int& neigh, dir card) {
@@ -40,14 +41,14 @@ void nextMove(vector<square>& board, deque<int>& decider, const int dim[], bool 
 	int adIndex;
 	int index = decider.front();
 	decider.pop_front();
-	if(isdigit(board[index].type[0])) {
+	if(isdigit(board[index].type)) {
 		int loc[3];
 		locationFrIndx(index, dim, loc);
-		loc[2] = atoi(board[index].type.c_str());
+		loc[2] = board[index].type - '0';
 		if(loc[2] >= dim[1]) {}
 		else {
 			indexFrLoc(loc, dim, adIndex);
-			if (board[adIndex].type == "#") {}
+			if ((board[adIndex].type == '#') || (board[adIndex].type == 'S')) {}
 			else if(board[adIndex].cameFrom != -1) {}
 			else {
 				board[adIndex].cameFrom = index;
@@ -58,13 +59,13 @@ void nextMove(vector<square>& board, deque<int>& decider, const int dim[], bool 
 	else {
 		for(int i = 0; i < 4; i++) {
 			if(getSqAtDir(index, dim, adIndex, dir(i))) {
-				if(board[adIndex].type == "#") {}
+				if(board[adIndex].type == '#') {}
 				else if(board[adIndex].cameFrom != -1) {}
-				else if(board[adIndex].type == "S") {}
+				else if(board[adIndex].type == 'S') {}
 				else {
 					board[adIndex].cameFrom = index;
 					genPush(decider, adIndex, useStack);
-					if(board[decider.front()].type == "B") {
+					if(board[decider.front()].type == 'B') {
 						break;
 					}
 				}

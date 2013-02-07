@@ -1,14 +1,13 @@
 #ifndef BUILD_H
 #define BUILD_H
-#include<string>
 #include<vector>
 
 
 enum dir {NORTH, EAST, SOUTH, WEST};
 
 struct square {
-	square() : type("."), cameFrom(-1) {}
-	std::string type;
+	square() : type('.'), cameFrom(-1) {}
+	char type;
 	int index;
 	int cameFrom;
 };

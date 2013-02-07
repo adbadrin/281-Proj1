@@ -15,5 +15,8 @@ clean:
 old:
 	g++ -O3 proj1o.cpp build.cpp print.cpp stquo.cpp -o proj1o
 
+exper:
+	g++ -O3 proj1.cpp build.cpp printe.cpp stqu.cpp -o proj1e
+
 bigTest:
-	g++ coordinateTest.cpp build.cpp -o builder
+	g++ -O3 coordinateTest.cpp build.cpp print.cpp -o builder

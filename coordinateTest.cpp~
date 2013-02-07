@@ -16,10 +16,10 @@ void locationFrIndx(const int&index, const int dim[], int loc[]) {
 */
 
 void buildCordMap() {
-	char specAr[35] = {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+	char specAr[28] = {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '#', '#', '#', '#', '#', '#', '#', '#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 	int dim[2];
 	//dim[0] = rand() % 100 + 1;
-	dim[0] = 1000;
+	dim[0] = 100;
 	//dim[1] = rand() % 10 + 1;
 	dim[1] = 10;
 	int loc[3];
@@ -31,7 +31,7 @@ void buildCordMap() {
 	int endIndex = rand() % (dim[0] * dim[0] * dim[1]);
 	int charDet;
 	for(int i = 0; i < dim[0] * dim[0] * dim[1]; i++) {
-		charDet = rand() % 35;
+		charDet = rand() % 28;
 		locationFrIndx(i, dim, loc);
 		if(i == startIndex) {
 				ss << "(" << loc[0] << "," << loc[1] << "," << loc[2] << "," << "S" << ")" << "\n";
@@ -45,7 +45,7 @@ void buildCordMap() {
 	}
 	cout << ss.str();
 }
-
+/*
 void printList(vector<square>& board, int dim[]) {
 	int loc[3];
 	ostringstream ss;
@@ -57,13 +57,22 @@ void printList(vector<square>& board, int dim[]) {
 	}
 	cout << ss.str();
 }
+*/
+
+
 
 int main() {
-	//buildCordMap();
+	buildCordMap();
+	/*
 	vector<square> board;
 	int dim[2];
 	int startIndex;
 	buildFromList(board, dim, startIndex);
 	printMapSln(board, dim, -1, false);
+	*/
 }
 
+
+
+
+	

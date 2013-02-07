@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 	int endIndex;
 	string s;
 	int dim[3];
-	while(c != -1){
+	while(c != -1) {
 		const struct option long_options[] = {
 			{"stack", 0, 0, 's'},
 			{"queue", 0, 0, 'q'},
@@ -81,9 +81,8 @@ int main(int argc, char* argv[]) {
 			return 1;
 		}
 	}
-	//Consider converting this to a deque of indices to save memory use
 	decider.push_front(startIndex);
-	while((!decider.empty()) && !(board[decider.front()].type == "B")) {
+	while((!decider.empty()) && !(board[decider.front()].type == 'B')) {
 		nextMove(board, decider, dim, useStack);
 	}
 	if(decider.empty()) {
@@ -100,7 +99,7 @@ int main(int argc, char* argv[]) {
 		printMapSln(board, dim, endIndex, true);
 	}
 	else {
-		printListSln(board, dim, endIndex);
+			printListSln(board, dim, endIndex);
 	}
 }
 
